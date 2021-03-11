@@ -51,12 +51,19 @@ const playerName = () => document.getElementById("playerName")
 const initialsInput = () => document.getElementById("initials")
 const timerTag = () => document.getElementById("timer")
 
+//object blob
+function Blob(name, height, width){
+  this.name = document.getElementById(name)
+  this.style.height = height
+  this.style.width = width 
+}
+
 const theBlob1 = () => document.getElementById("theBlob1")
 const theBlob2 = () => document.getElementById("theBlob2")
 const theBlob3 = () => document.getElementById("theBlob3")
 const theBlob4 = () => document.getElementById("theBlob4")
 const theBlob5 = () => document.getElementById("theBlob5")
-let blobsCounter = () => blobsKilledTag().innerText = blobCount++
+let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount++}`
 const blobsKilledTag = () => document.getElementById("blobsKilled")
 
 let gameTag = () => document.getElementById("game")
@@ -64,13 +71,14 @@ let gameTag = () => document.getElementById("game")
 //html
 let nameTemplate = () => {
   return `
+  <p>There are Blobs taking over the internet! Destroy them by clicking on them untill they disapear.  There is only a minute left before it's too late! If you are up to the challange please enter your name... and good luck!</p>
   <h3 id="namePlease" class="inits">Your Initials</h3>
   <form id="playerName">
     <div class="input-field">
       <input type="text" name="initials" id="initials" />
     </div>
     <br>
-    <input type="submit" value="set name" />
+    <input type="submit" value="I'm Ready" />
   </form>
   `;
 }
@@ -144,7 +152,14 @@ let levels = [level1(), level2(), level3(), level4(), level5()]
 
 
 let renderGame = () => {
-  gameTag().innerHTML = level1()}
+  if (blobsCounter() == "Blobs Destroyed = 0") {gameTag().innerHTML = level1()}
+  else if (blobsCounter() == "Blobs Destroyed = 1") {gameTag().innerHTML = level2()}
+  else if (blobsCounter() == "Blobs Destroyed = 3") {gameTag().innerHTML = level3()}
+  else if (blobsCounter() == "Blobs Destroyed = 6") {gameTag().innerHTML = level4()}
+  else if (blobsCounter() == "Blobs Destroyed = 10") {gameTag().innerHTML = level5()}
+  else return blobsCounter() = "You Win!"
+}
+  
 
 // let renderGame = (level = level1()) => {gameTag().innerHTML = level}
 
@@ -319,6 +334,30 @@ let blobsWidth = (array) => {
 
 let blobsSize = (array) => blobsHeight(array) && blobsWidth(array)
 
+// theBlob1().style.height = "200px"
+// theBlob1().style.width = "200px"
+// theBlob2().style.height = "200px"
+// theBlob2().style.width = "200px"
+// theBlob3().style.height = "200px"
+// theBlob3().style.width = "200px"
+// theBlob4().style.height = "200px"
+// theBlob4().style.width = "200px"
+// theBlob5().style.height = "200px"
+// theBlob5().style.width = "200px"
+// clickBlob1()
+// clickBlob2()
+// clickBlob3()
+// clickBlob4()
+// clickBlob4()
+// clickBlob5()
+
+
+
+
+
+
+
+
 
   let submitPlayer = (e) => {
     e.preventDefault();
@@ -326,8 +365,12 @@ let blobsSize = (array) => blobsHeight(array) && blobsWidth(array)
       initials: initialsInput().value,
     });
     resetPlayer()
-   return tagText(h1(), "Lets Play The Blob Game!") && renderGame()
+   return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame()
   }
+  
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   renderGame();
+  // });
   
 
 let renderForm = () => {
@@ -339,5 +382,5 @@ let renderForm = () => {
 h1().style.color = "grey"
 gameText()
 renderForm()
-
+// clickBlob()
 
