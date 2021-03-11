@@ -71,7 +71,14 @@ let gameTag = () => document.getElementById("game")
 //html
 let nameTemplate = () => {
   return `
-  <p>There are Blobs taking over the internet! Destroy them by clicking on them untill they disapear.  There is only a minute left before it's too late! If you are up to the challange please enter your name... and good luck!</p>
+  <div class="contianer">
+  <p style="color:rgb(12, 220, 206)">There are Blobs taking over the internet!</p>
+  <p style="color:rgb(220, 161, 12)">Destroy them by clicking on them untill they disapear.</p>
+  <p style="color:rgb(140, 12, 220)">There is only a minute left before it's too late!</p>
+  <p style="color:rgb(210, 210, 210)">If you are up to the challange please enter your name...</p>
+  <p style="color:rgb(255, 147, 147)"> and good luck!</p>
+  </div>
+  <br>
   <h3 id="namePlease" class="inits">Your Initials</h3>
   <form id="playerName">
     <div class="input-field">
@@ -88,7 +95,7 @@ let level1 = () => {
   <h4 id="timer" style="color:red"></h4> 
   <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1" style="top: 0px; left: 0px;"></div>
+  <div id="theBlob1" class="child-1" style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
@@ -99,8 +106,8 @@ let level2 = () => {
   <h4 id="timer" style="color:red"></h4> 
   <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px;"></div>
-  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px;"></div>
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
@@ -111,9 +118,9 @@ let level3 = () => {
   <h4 id="timer" style="color:red"></h4> 
   <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px;"></div>
-  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px;"></div>
-  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px;"></div>
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
@@ -124,10 +131,10 @@ let level4 = () => {
   <h4 id="timer" style="color:red"></h4> 
   <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px;"></div>
-  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px;"></div>
-  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px;"></div>
-  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px;"></div>
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
@@ -138,11 +145,11 @@ let level5 = () => {
   <h4 id="timer" style="color:red"></h4> 
   <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px;"></div>
-  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px;"></div>
-  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px;"></div>
-  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px;"></div>
-  <div id="theBlob5" class="child-5" style="bottom: 200px; left: 200px;"></div>
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob5" class="child-5" style="bottom: 200px; left: 200px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
@@ -334,22 +341,14 @@ let blobsWidth = (array) => {
 
 let blobsSize = (array) => blobsHeight(array) && blobsWidth(array)
 
-// theBlob1().style.height = "200px"
-// theBlob1().style.width = "200px"
-// theBlob2().style.height = "200px"
-// theBlob2().style.width = "200px"
-// theBlob3().style.height = "200px"
-// theBlob3().style.width = "200px"
-// theBlob4().style.height = "200px"
-// theBlob4().style.width = "200px"
-// theBlob5().style.height = "200px"
-// theBlob5().style.width = "200px"
-// clickBlob1()
-// clickBlob2()
-// clickBlob3()
-// clickBlob4()
-// clickBlob4()
-// clickBlob5()
+
+clickBlob1()
+clickBlob2()
+clickBlob3()
+clickBlob4()
+clickBlob4()
+clickBlob5()
+
 
 
 
