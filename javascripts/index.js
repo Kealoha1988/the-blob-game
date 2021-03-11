@@ -42,6 +42,7 @@ const playerName = () => document.getElementById("playerName")
 const initialsInput = () => document.getElementById("initials")
 
 const theBlob1 = () => document.getElementById("theBlob1")
+const theBlob2 = () => document.getElementById("theBlob2")
 
 let gameTag = () => document.getElementById("game")
 
@@ -68,10 +69,22 @@ let level1 = () => {
   `
 }
 
+let level2 = () => {
+  return `
+  <h4 id="timer" style="color:red"></h4> 
+  <div id="game" class="parent">
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px;"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px;"></div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  </div>
+  `
+}
+
 
 
 let renderGame = () => {gameTag().innerHTML = level1()}
 
+//less blob1
 let heightPx1 = () => {
   let a = theBlob1().style.height.split("")
     a.splice(-2, 2)
@@ -97,6 +110,33 @@ let lessBlob1Width = () => {
 }
 
  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
+
+ //less blob2
+let heightPx2 = () => {
+  let a = theBlob2().style.height.split("")
+    a.splice(-2, 2)
+    let num = parseInt(a.join(""))
+    return num
+}
+
+let widthPx2 = () => {
+  let a = theBlob2().style.height.split("")
+  a.splice(-2, 2)
+  let num = parseInt(a.join(""))
+  return num
+}
+
+let lessBlob2Height = () => {
+  let newNum = heightPx2() -20 
+  return theBlob2().style.height = "" + newNum + "px" 
+}
+
+let lessBlob2Width = () => {
+  let newNum = widthPx2() -20 
+  return theBlob2().style.width = "" + newNum + "px" 
+}
+
+ let lessBlob2 = () => lessBlob2Height() && lessBlob2Width()
 
 
 
