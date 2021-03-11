@@ -1,5 +1,30 @@
 let players = []
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+let makeLongList = () => {
+  a = []
+  for (i = 0; i < 61; i ++){
+    a.push(i)
+  }
+  return a.reverse()
+}
+
+let list = makeLongList()
+
+let countdown = async () => {
+  for (let item of list) {
+    await sleep(1000)
+     timerTag().innerText = item    
+  }
+  if (timerTag().innerText = "0"){
+    return timerTag().innerText = "GAME OVER"
+  }
+}
+
+
 const h1 = () => document.getElementById("h1")
 
 let tagText = (element, words) => element.innerText = words
@@ -35,6 +60,7 @@ let nameTemplate = () => {
 
 let level1 = () => {
   return `
+  <h4 id="timer" style="color:red"></h4> 
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1" style="top: 0px; left: 0px;"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
