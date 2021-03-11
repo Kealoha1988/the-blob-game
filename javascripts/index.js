@@ -16,6 +16,8 @@ const playerName = () => document.getElementById("playerName")
 
 const initialsInput = () => document.getElementById("initials")
 
+const theBlob1 = () => document.getElementById("theBlob1")
+
 let nameTemplate = () => {
   return `
   <h3 id="namePlease" class="inits">Your Initials</h3>
