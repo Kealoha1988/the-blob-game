@@ -40,6 +40,19 @@ let level1 = () => {
 
 
 
+let renderGame = () => {gameTag().innerHTML = level1()}
+
+let submitPlayer = (e) => {
+  e.preventDefault();
+  players.push({
+    initials: initialsInput().value,
+  });
+  resetPlayer()
+ return tagText(h1(), "Lets Play The Blob Game!") && renderGame()
+}
+
+
+
 
 let renderForm = () => {
   resetPlayer();
