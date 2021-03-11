@@ -1,0 +1,17 @@
+.parent {
+  background-color: rgb(230, 224, 191);
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 600px;
+}
+
+.child-1 {
+  background-color: rgb(12, 220, 206);
+  height: 200px;
+  position: absolute;
+  width: 200px;
+  transition: transform 1s ease-in-out;
+}

@@ -29,6 +29,15 @@ let nameTemplate = () => {
   `;
 }
 
+let level1 = () => {
+  return `
+  <div id="game" class="parent">
+  <div id="theBlob1" class="child-1" style="top: 0px; left: 0px;"></div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  </div>
+  `
+}
+
 
 
 
@@ -37,3 +46,7 @@ let renderForm = () => {
   playerTag().innerHTML = nameTemplate();
   playerName().addEventListener("submit", submitPlayer);
 }
+
+h1().style.color = "grey"
+gameText()
+renderForm()
