@@ -46,6 +46,35 @@ let level1 = () => {
 
 let renderGame = () => {gameTag().innerHTML = level1()}
 
+let heightPx1 = () => {
+  let a = theBlob1().style.height.split("")
+    a.splice(-2, 2)
+    let num = parseInt(a.join(""))
+    return num
+}
+
+let widthPx1 = () => {
+  let a = theBlob1().style.height.split("")
+  a.splice(-2, 2)
+  let num = parseInt(a.join(""))
+  return num
+}
+
+let lessBlob1Height = () => {
+  let newNum = heightPx1() -20 
+  return theBlob1().style.height = "" + newNum + "px" 
+}
+
+let lessBlob1Width = () => {
+  let newNum = widthPx1() -20 
+  return theBlob1().style.width = "" + newNum + "px" 
+}
+
+ let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
+
+
+
+
 let submitPlayer = (e) => {
   e.preventDefault();
   players.push({
