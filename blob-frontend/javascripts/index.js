@@ -69,6 +69,7 @@ const theBlob3 = () => document.getElementById("theBlob3")
 const theBlob4 = () => document.getElementById("theBlob4")
 const theBlob5 = () => document.getElementById("theBlob5")
 let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount += 1}`
+let readBlobsCounter = () => blobsKilledTag().innerText
 const blobsKilledTag = () => document.getElementById("blobsKilled")
 
 let gameTag = () => document.getElementById("game")
@@ -160,14 +161,15 @@ let currentLevel = (level) => {
 let setBlobCount = () => {blobsKilledTag().innerText = `Blobs Destroyed = ${num}`}
 
 let renderGame = () => {
-  if (blobsCounter() == "Blobs Destroyed = 0") {return currentLevel(level1())}
-  else if (blobsCounter() == "Blobs Destroyed = 1") {return currentLevel(level2()) && setBlobCount(1)} 
-  else if (blobsCounter() == "Blobs Destroyed = 3") {return currentLevel(level3()) && setBlobCount(3)}
-  else if (blobsCounter() == "Blobs Destroyed = 6") {return currentLevel(level4()) && setBlobCount(6)}
-  else if (blobsCounter() == "Blobs Destroyed = 10") {return currentLevel(level5()) && setBlobCount(10)}
+//   // console.log(blobsCounter())
+ if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1())}
+else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2())} 
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {currentLevel(level3())}
+  else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4())}
+  else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5())}
     
-  else return blobsCounter() = "You Win!"
-}
+  else if (readBlobsCounter() == "Blobs Destroyed = 15") {alert("You Win!!!")}
+ }
   
 
 // let renderGame = (level = level1()) => {gameTag().innerHTML = level}
