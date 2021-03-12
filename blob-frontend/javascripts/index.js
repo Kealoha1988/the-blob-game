@@ -149,28 +149,72 @@ let level5 = () => {
   <div id="theBlob5" class="child-5" style="bottom: 200px; left: 200px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
-  ` 
+  `}
+
+
+  let renderLevel2 = () => {
+    level2() 
+    clickBlob1()
+    clickBlob2()
+  }
+
+  let renderLevel3 = () => {
+    level3()
+    clickBlob1()
+    clickBlob2()
+    clickBlob3()
+  }
+
+  let renderLevel4 = () => {
+    level4()
+    clickBlob1()
+    clickBlob2()
+    clickBlob3()
+    clickBlob4()
+  }
+
+let renderLevel5 = () => {
+  level5()
+  clickBlob1()
+  clickBlob2()
+  clickBlob3()
+  clickBlob4()
+  clickBlob5()
 }
 
-let levels = [level1(), level2(), level3(), level4(), level5()]
 
 let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let setBlobCount = () => {blobsKilledTag().innerText = `Blobs Destroyed = ${num}`}
+
+
+
+
+
 
 let renderGame = () => {
-//   // console.log(blobsCounter())
- if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1())}
-else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2())} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {currentLevel(level3())}
-  else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4())}
-  else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5())}
-    
+if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {currentLevel(level3()) && renderLevel3()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4()) && renderLevel4()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5()) && renderLevel5()}
   else if (readBlobsCounter() == "Blobs Destroyed = 15") {alert("You Win!!!")}
  }
+
+ let checkRenderGame = () => {
+   let a = parseInt(timerTag().innerText = "0") / 5
+
+   if (!a.toString().includes(".") ) {destroyBlob()}
+ }
+ 
+ let destroyBlob = () => {
   
+   if (theBlob1().style.width == "0px") {blobsCounter()}
+ }
+
+//  let checkIfDestroyed = () => {document.addEventListener("click", destroyBlob())}
+
 
 // let renderGame = (level = level1()) => {gameTag().innerHTML = level}
 
@@ -368,5 +412,6 @@ let renderForm = () => {
 h1().style.color = "grey"
 gameText()
 renderForm()
+
 // clickBlob()
 
