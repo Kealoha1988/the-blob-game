@@ -5,6 +5,11 @@ let blobCount = 0
 
 let countDownDate = new Date();
 
+function Player(name) {
+  this.name = name
+  
+}
+
 //countdown
 
 const sleep = (milliseconds) => {
@@ -63,7 +68,7 @@ const theBlob2 = () => document.getElementById("theBlob2")
 const theBlob3 = () => document.getElementById("theBlob3")
 const theBlob4 = () => document.getElementById("theBlob4")
 const theBlob5 = () => document.getElementById("theBlob5")
-let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount++}`
+let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount += 1}`
 const blobsKilledTag = () => document.getElementById("blobsKilled")
 
 let gameTag = () => document.getElementById("game")
@@ -92,8 +97,6 @@ let nameTemplate = () => {
 
 let level1 = () => {
   return `
-  <h4 id="timer" style="color:red"></h4> 
-  <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1" style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
@@ -103,8 +106,6 @@ let level1 = () => {
 
 let level2 = () => {
   return `
-  <h4 id="timer" style="color:red"></h4> 
-  <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
@@ -115,8 +116,6 @@ let level2 = () => {
 
 let level3 = () => {
   return `
-  <h4 id="timer" style="color:red"></h4> 
-  <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
@@ -128,8 +127,6 @@ let level3 = () => {
 
 let level4 = () => {
   return `
-  <h4 id="timer" style="color:red"></h4> 
-  <h4 id="blobsKilled"></h4>
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
@@ -142,8 +139,7 @@ let level4 = () => {
 
 let level5 = () => {
   return `
-  <h4 id="timer" style="color:red"></h4> 
-  <h4 id="blobsKilled"></h4>
+
   <div id="game" class="parent">
   <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
   <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
@@ -152,18 +148,24 @@ let level5 = () => {
   <div id="theBlob5" class="child-5" style="bottom: 200px; left: 200px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
-  `
+  ` 
 }
 
 let levels = [level1(), level2(), level3(), level4(), level5()]
 
+let currentLevel = (level) => {
+  return gameTag().innerHTML = level
+} 
+
+let setBlobCount = () => {blobsKilledTag().innerText = `Blobs Destroyed = ${num}`}
 
 let renderGame = () => {
-  if (blobsCounter() == "Blobs Destroyed = 0") {gameTag().innerHTML = level1()}
-  else if (blobsCounter() == "Blobs Destroyed = 1") {gameTag().innerHTML = level2()}
-  else if (blobsCounter() == "Blobs Destroyed = 3") {gameTag().innerHTML = level3()}
-  else if (blobsCounter() == "Blobs Destroyed = 6") {gameTag().innerHTML = level4()}
-  else if (blobsCounter() == "Blobs Destroyed = 10") {gameTag().innerHTML = level5()}
+  if (blobsCounter() == "Blobs Destroyed = 0") {return currentLevel(level1())}
+  else if (blobsCounter() == "Blobs Destroyed = 1") {return currentLevel(level2()) && setBlobCount(1)} 
+  else if (blobsCounter() == "Blobs Destroyed = 3") {return currentLevel(level3()) && setBlobCount(3)}
+  else if (blobsCounter() == "Blobs Destroyed = 6") {return currentLevel(level4()) && setBlobCount(6)}
+  else if (blobsCounter() == "Blobs Destroyed = 10") {return currentLevel(level5()) && setBlobCount(10)}
+    
   else return blobsCounter() = "You Win!"
 }
   
@@ -171,11 +173,7 @@ let renderGame = () => {
 // let renderGame = (level = level1()) => {gameTag().innerHTML = level}
 
 
-// blob array methods
-let theBLobsArray = []
-let makeBlobsArray = () => {
-  theBLobsArray.push(theblob)
-}
+
 
 
 //less blob1
@@ -324,37 +322,24 @@ let lessBlob5Width = () => {
  let clickBlob4 = () => theBlob4().addEventListener("click", lessBlob4)
  let clickBlob5 = () => theBlob5().addEventListener("click", lessBlob5)  
 
-
-
-
-//set the size
-let blobsHeight = (array) => {
-  for (let i = 0; i < array.length; i++){
-    return array[i]().style.height = "200px"
-  }
-}
-let blobsWidth = (array) => {
-  for (let i = 0; i < array.length; i++){
-    return array[i]().style.width = "200px"
-  }
+// let destroyTheBlob = (blob) => {
+//   if (blob.style.height || func.style.width == "20px") {return blob.style.height = "" && blob.styl}
+// }
+function getPlayer() {
+  fetch('http://localhost:3000/players')
+  .then(resp => resp.json())
+  .then(data => data)
+  return data
 }
 
-let blobsSize = (array) => blobsHeight(array) && blobsWidth(array)
 
 
-clickBlob1()
-clickBlob2()
-clickBlob3()
-clickBlob4()
-clickBlob4()
-clickBlob5()
-
-
-
-
-
-
-
+// clickBlob1()
+// clickBlob2()
+// clickBlob3()
+// clickBlob4()
+// clickBlob4()
+// clickBlob5()
 
 
 
