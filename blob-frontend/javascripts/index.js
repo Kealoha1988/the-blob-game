@@ -29,6 +29,7 @@ let list = makeLongList()
 let countdown = async () => {
   for (let item of list) {
     await sleep(1000)
+    checkIfBlobDestroyed()
      timerTag().innerText = item    
   }
   if (timerTag().innerText = "0"){
@@ -157,14 +158,12 @@ let level5 = () => {
     clickBlob1()
     clickBlob2()
   }
-
   let renderLevel3 = () => {
     level3()
     clickBlob1()
     clickBlob2()
     clickBlob3()
   }
-
   let renderLevel4 = () => {
     level4()
     clickBlob1()
@@ -172,7 +171,6 @@ let level5 = () => {
     clickBlob3()
     clickBlob4()
   }
-
 let renderLevel5 = () => {
   level5()
   clickBlob1()
@@ -189,12 +187,21 @@ let currentLevel = (level) => {
 
 
 
+// let checkBlobsDestroyed = () => {
+//   if (readBlobsCounter() == "Blobs Destroyed = 0")
+//   else if (readBlobsCounter() == "Blobs Destroyed = 1")
+//   else if (readBlobsCounter() == "Blobs Destroyed = 3")
+//   else if (readBlobsCounter() == "Blobs Destroyed = 6")
+//   else if (readBlobsCounter() == "Blobs Destroyed = 10")
+//   else if (readBlobsCounter() == "Blobs Destroyed = 15")
 
+
+// }
 
 
 
 let renderGame = () => {
-if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
+  if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
   else if (readBlobsCounter() == "Blobs Destroyed = 3") {currentLevel(level3()) && renderLevel3()}
   else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4()) && renderLevel4()}
@@ -202,16 +209,22 @@ if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clic
   else if (readBlobsCounter() == "Blobs Destroyed = 15") {alert("You Win!!!")}
  }
 
- let checkRenderGame = () => {
-   let a = parseInt(timerTag().innerText = "0") / 5
+//  let checkRenderGame = () => {
+//    let a = parseInt(timerTag().innerText = "0") / 5
 
-   if (!a.toString().includes(".") ) {destroyBlob()}
- }
+//    if (!a.toString().includes(".") ) {destroyBlob()}
+//  }
  
- let destroyBlob = () => {
-  
-   if (theBlob1().style.width == "0px") {blobsCounter()}
+ let checkIfBlobDestroyed = () => {
+   console.log("im checking")
+   if (theBlob1().style.width == "0px") {
+     blobsCounter()
+     renderGame()
+     setTimeout(() => {theBlob1().style.width = ""}, 500)
+   }
  }
+
+
 
 //  let checkIfDestroyed = () => {document.addEventListener("click", destroyBlob())}
 
@@ -362,7 +375,7 @@ let lessBlob5Width = () => {
  let lessBlob5 = () => lessBlob5Height() && lessBlob5Width()
 
 //click blobs
- let clickBlob1 = () => theBlob1().addEventListener("click", lessBlob1) 
+ let clickBlob1 = () => theBlob1().addEventListener("click", lessBlob1)
  let clickBlob2 = () => theBlob2().addEventListener("click", lessBlob2) 
  let clickBlob3 = () => theBlob3().addEventListener("click", lessBlob3) 
  let clickBlob4 = () => theBlob4().addEventListener("click", lessBlob4)
