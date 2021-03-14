@@ -2,16 +2,15 @@
 let players = []
 let numArray = [1, 2, 3 ,4]
 let blobCount = 0
-
 let countDownDate = new Date();
+const baseUrl = 'http://localhost:3000'
 
 function Player(name) {
   this.name = name
-  
+
 }
 
 //countdown
-
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -130,7 +129,7 @@ let renderGame = () => {
 
  
  let checkIfBlobDestroyed = () => {
-   console.log("im checking")
+   
    if (theBlob1().style.width == "0px") {
      blobsCounter()
      renderGame()
@@ -139,7 +138,7 @@ let renderGame = () => {
  }
 
  let checkIfBlobDestroyed2 = () => {
-  console.log("im checking")
+  
   if (theBlob2()?.style.width == "0px") {
     blobsCounter()
     renderGame()
@@ -157,9 +156,39 @@ let renderGame = () => {
 
 
 
-
-
 //less blob1
+// let heightPx1 = (blob) => {
+//   let b = document.getElementById(blob)
+//   let a = b.style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
+
+// let widthPx1 = (blob) => {
+//   let b = document.getElementById(blob)
+
+//   let a = b.style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
+
+// let lessBlob1Height = (blob) => {
+//   const b = document.getElementById(blob)
+
+//   let newNum = heightPx1(b) -20 
+//   return b.style.height = "" + newNum + "px" 
+// }
+
+// let lessBlob1Width = (blob) => {
+//   const b = document.getElementById(blob)
+
+//   let newNum = widthPx1(b) -20 
+//   return b.style.width = "" + newNum + "px" 
+// }
+
+//  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
 let heightPx1 = () => {
   let a = theBlob1().style.height.split("")
     a.splice(-2, 2)
@@ -185,6 +214,8 @@ let lessBlob1Width = () => {
 }
 
  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
+
+
 
  //less blob2
 let heightPx2 = () => {
@@ -213,23 +244,67 @@ let lessBlob2Width = () => {
 
  let lessBlob2 = () => lessBlob2Height() && lessBlob2Width()
 
-function getPlayer() {
-  fetch('http://localhost:3000/players')
-  .then(resp => resp.json())
-  .then(data => data)
-  return data
+ function shrinkBlob(blob){
+  // const b = document.getElementById(blob)
+  heightPx1(blob)
+  widthPx1(blob)
+  lessBlob1Height(blob)
+  lessBlob1Width(blob)
 }
+
+
+// function getPlayer() {
+//   fetch(playersURL)
+//   .then(response => response.json())
+//   .then(data => console.log(data))
+// }
+
+
+async function getPlayer() {
+  let response = await fetch(baseUrl + "/players")
+  let data = await response.json
+  console.log(data)
+}
+
+function getScores() {
+  fetch(baseUrl + "/scores")
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+}
+
+
+
+function setThePlayer(e) {
+  e.preventDefault();
+  let strongParams = {
+      player: {
+          name: initialsInput().value, 
+      }
+  }
+  fetch(baseUrl + "/players", {
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(strongParams),
+      method: "POST"
+  })
+  .then( function(response) {
+      return response.json();
+  })
+  .then( function(player) {
+      players.push(player)
+      // renderPoems();
+  })
+  resetPlayer()
+  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
+}
+
 
 //click blobs
  let clickBlob1 = () => theBlob1().addEventListener("click", lessBlob1)
- let clickBlob2 = () => theBlob2().addEventListener("click", lessBlob2) 
-
-// clickBlob1()
-// clickBlob2()
-// clickBlob3()
-// clickBlob4()
-// clickBlob4()
-// clickBlob5()
+ let clickBlob2 = () => theBlob2().addEventListener("click", lessBlob2)
 
 
 
@@ -238,24 +313,27 @@ function getPlayer() {
     players.push({
       initials: initialsInput().value,
     });
+
     resetPlayer()
+
    return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame()
   }
   
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   renderGame();
-  // });
+  document.addEventListener("DOMContentLoaded", function () {
+  gameText()
+  renderForm()
+});
   
 
 let renderForm = () => {
   resetPlayer();
   playerTag().innerHTML = nameTemplate();
-  playerName().addEventListener("submit", submitPlayer);
+  playerName().addEventListener("submit", setThePlayer);
 }
 
 h1().style.color = "grey"
-gameText()
-renderForm()
+// gameText()
+// renderForm()
 
 // clickBlob()
 
