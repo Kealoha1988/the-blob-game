@@ -1,5 +1,6 @@
 //variables
 let players = []
+let scores = []
 let numArray = [1, 2, 3 ,4]
 let blobCount = 0
 let countDownDate = new Date();
@@ -46,9 +47,11 @@ let gameText = () => tagText(h1(), "Welcome to Blob Game")
 const playerTag = () => document.getElementById("player")
 const namePleaseTag = () => document.getElementById("namePlease")
 const resetPlayer = () => playerTag().innerHTML = ""
+const resetMain = () => mainTag().innerHTML = ""
 const playerName = () => document.getElementById("playerName")
 const initialsInput = () => document.getElementById("initials")
 const timerTag = () => document.getElementById("timer")
+const main = document.getElementById("main")
 
 
 const theBlob1 = () => document.getElementById("theBlob1")
@@ -61,6 +64,7 @@ let readBlobsCounter = () => blobsKilledTag().innerText
 const blobsKilledTag = () => document.getElementById("blobsKilled")
 
 let gameTag = () => document.getElementById("game")
+let mainTag = () => document.getElementById("main")
 
 //html
 let nameTemplate = () => {
@@ -105,6 +109,7 @@ let level2 = () => {
 
 
 
+
   let renderLevel2 = () => {
     level2() 
     clickBlob1()
@@ -115,17 +120,14 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-
-
-
+let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0]}</h1>`
 
 
 let renderGame = () => {
   if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {alert("You Win!!!")}
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {scores.push(parseInt(timerTag().innerText)) && showScore()}
  }
-
 
  
  let checkIfBlobDestroyed = () => {
@@ -295,9 +297,34 @@ function setThePlayer(e) {
   })
   .then( function(player) {
       players.push(player)
-      // renderPoems();
   })
   resetPlayer()
+  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
+}
+
+function setTheScore(e) {
+  e.preventDefault();
+  let strongParams = {
+      score: {
+          time: scores[0], 
+      }
+  }
+  fetch(baseUrl + "/scores", {
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(strongParams),
+      method: "POST"
+  })
+  .then( function(response) {
+      return response.json();
+  })
+  .then( function(score) {
+      scores.push(score)
+     
+  })
+  resetScore()
   return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
 }
 
