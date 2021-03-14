@@ -120,7 +120,7 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0].time}</h1>`
+let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0]}</h1>`
 
 
 let renderGame = () => {
