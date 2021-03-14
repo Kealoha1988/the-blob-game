@@ -120,13 +120,13 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0]}</h1>`
+let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0].time}</h1>`
 
 
 let renderGame = () => {
   if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {scores.push(parseInt(timerTag().innerText)) && showScore()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {scores.push(parseInt(timerTag().innerText)) && setTheScore()}
  }
 
  
@@ -302,8 +302,9 @@ function setThePlayer(e) {
   return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
 }
 
-function setTheScore(e) {
-  e.preventDefault();
+
+
+function setTheScore() {
   let strongParams = {
       score: {
           time: scores[0], 
@@ -324,8 +325,8 @@ function setTheScore(e) {
       scores.push(score)
      
   })
-  resetScore()
-  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
+  resetMain()
+  return showScore();
 }
 
 
@@ -335,16 +336,16 @@ function setTheScore(e) {
 
 
 
-  let submitPlayer = (e) => {
-    e.preventDefault();
-    players.push({
-      initials: initialsInput().value,
-    });
+  // let submitPlayer = (e) => {
+  //   e.preventDefault();
+  //   players.push({
+  //     initials: initialsInput().value,
+  //   });
 
-    resetPlayer()
+  //   resetPlayer()
 
-   return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame()
-  }
+  //  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame()
+  // }
   
   document.addEventListener("DOMContentLoaded", function () {
   gameText()
