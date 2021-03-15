@@ -2,6 +2,8 @@
 let players = []
 let scores = []
 let numArray = [1, 2, 3 ,4]
+let allPlayers = []
+let allScores = []
 let blobCount = 0
 let countDownDate = new Date();
 const baseUrl = 'http://localhost:3000'
@@ -120,14 +122,24 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h1>${players[0].name} Your Score is: ${scores[0]}</h1>`
+let showScore = () => document.getElementById("main").innerHTML = `<h3>time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
 
+
+function workPlease(){
+  scores.push(parseInt(timerTag().innerText))
+  
+  setTheScore()
+
+ showAllScoresAndPlayers(allScores)
+}
 
 let renderGame = () => {
+  showAll()
+
   if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {scores.push(parseInt(timerTag().innerText)) && setTheScore()}
- }
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {workPlease()}
+}
 
  
  let checkIfBlobDestroyed = () => {
@@ -365,3 +377,16 @@ h1().style.color = "grey"
 
 // clickBlob()
 
+let showAll = () => {
+  
+  fetch(baseUrl + "/scores")
+  .then(response => response.json())
+  .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
+}
+
+function showAllScoresAndPlayers(arr){
+  mainTag().appendChild(document.createElement("div")).innerHTML = `<h3>top 10</h3>`
+  for (let i = 0; i < 11; i++){
+    mainTag().appendChild(document.createElement("div")).innerHTML = `<h4>${arr[i]}</h4>`
+  }
+}
