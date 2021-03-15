@@ -122,7 +122,7 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h3>time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
+let showScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
 
 
 function workPlease(){
@@ -135,7 +135,6 @@ function workPlease(){
 
 let renderGame = () => {
   showAll()
-
   if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
   else if (readBlobsCounter() == "Blobs Destroyed = 3") {workPlease()}
@@ -338,6 +337,7 @@ function setTheScore() {
      
   })
   resetMain()
+
   return showScore();
 }
 
@@ -378,7 +378,6 @@ h1().style.color = "grey"
 // clickBlob()
 
 let showAll = () => {
-  
   fetch(baseUrl + "/scores")
   .then(response => response.json())
   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
@@ -394,9 +393,30 @@ function showAllScoresAndPlayers(arr){
   <input type="submit" value="delete" />
 </form>`
 
-  mainTag().appendChild(document.createElement("div")).innerHTML = `<h3>top 10</h3>`
+  mainTag().appendChild(document.createElement("div")).innerHTML = `<h3 style="color:rgb(220, 161, 12">top 10</h3>`
 
   for (let i = 0; i < 11; i++){
-    mainTag().appendChild(document.createElement("div")).innerHTML = `<h4>${arr[i]}</h4>`
+    mainTag().appendChild(document.createElement("div")).innerHTML = `<h4 style="color:rgb(140, 12, 220)">${arr[i]}</h4>`
   }
+  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="play again">
+  <input type="submit" value="play again" />
+</form>`
+}
+
+function resetGame(){
+  document.addEventListener("DOMContentLoaded", function () {
+    gameText()
+    renderForm()
+  });
+}
+
+function deletePlayer(){
+
+  fetch(baseUrl + "/players/" + players[0].id, {
+  method: "DELETE"
+  })
+}
+function beCool(){
+  deletePlayer()
+  resetGame()
 }
