@@ -385,7 +385,17 @@ let showAll = () => {
 }
 
 function showAllScoresAndPlayers(arr){
+  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="playerName">
+  <div class="input-field">
+    <input type="text" name="initials" id="initials" />
+  </div>
+  <br>
+  <input type="submit" value="edit" />
+  <input type="submit" value="delete" />
+</form>`
+
   mainTag().appendChild(document.createElement("div")).innerHTML = `<h3>top 10</h3>`
+
   for (let i = 0; i < 11; i++){
     mainTag().appendChild(document.createElement("div")).innerHTML = `<h4>${arr[i]}</h4>`
   }
