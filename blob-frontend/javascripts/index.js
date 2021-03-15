@@ -383,13 +383,15 @@ let showAll = () => {
   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
 }
 
+const playAgainTag = () => document.getElementById("play again")
+const deleteTag = () => document.getElementById("delete")
+
 function showAllScoresAndPlayers(arr){
-  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="playerName">
+  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="delete">
   <div class="input-field">
     <input type="text" name="initials" id="initials" />
   </div>
   <br>
-  <input type="submit" value="edit" />
   <input type="submit" value="delete" />
 </form>`
 
@@ -401,13 +403,23 @@ function showAllScoresAndPlayers(arr){
   mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="play again">
   <input type="submit" value="play again" />
 </form>`
+
+playAgainTag().addEventListener("click", function(e){
+  e.preventDefault
+  return resetGame()
+})
+deleteTag().addEventListener("click", function(e){
+  e.preventDefault
+  alert("sorry to see you go!")
+  deletePlayer()
+  return resetGame()
+
+})
 }
 
 function resetGame(){
-  document.addEventListener("DOMContentLoaded", function () {
     gameText()
     renderForm()
-  });
 }
 
 function deletePlayer(){
