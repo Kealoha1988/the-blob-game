@@ -50,7 +50,7 @@ const playerTag = () => document.getElementById("player")
 const namePleaseTag = () => document.getElementById("namePlease")
 const resetPlayer = () => playerTag().innerHTML = ""
 const resetMain = () => mainTag().innerHTML = ""
-const playerName = () => document.getElementById("playerName")
+
 const initialsInput = () => document.getElementById("initials")
 const timerTag = () => document.getElementById("timer")
 const main = document.getElementById("main")
@@ -88,6 +88,32 @@ let nameTemplate = () => {
     <input type="submit" value="I'm Ready" />
   </form>
   `;
+}
+
+let editForm = () => {
+  return `
+  <form id="playerName" data-id="${players[0].id}">
+  <div class="input-field">
+    <input type="text" name="initials" id="initials" value="${players[0].name}" />
+  </div>
+  <br>
+  <input type="submit" value="change name" />
+</form>
+`
+}
+
+
+let deleteButton = () => {
+  return `
+<form id="delete">
+<input type="submit" value="delete" />
+</form>`
+}
+
+let playAgainButton = () => {
+  return `<form id="play again">
+  <input type="submit" value="play again" />
+</form>`
 }
 
 let level1 = () => {
@@ -348,17 +374,11 @@ function setTheScore() {
 
 
 
-  // let submitPlayer = (e) => {
-  //   e.preventDefault();
-  //   players.push({
-  //     initials: initialsInput().value,
-  //   });
 
-  //   resetPlayer()
 
-  //  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame()
-  // }
-  
+
+
+
   document.addEventListener("DOMContentLoaded", function () {
   gameText()
   renderForm()
@@ -383,38 +403,42 @@ let showAll = () => {
   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
 }
 
+
+
 const playAgainTag = () => document.getElementById("play again")
 const deleteTag = () => document.getElementById("delete")
+const playerName = () => document.getElementById("playerName")
+
 
 function showAllScoresAndPlayers(arr){
-  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="delete">
-  <div class="input-field">
-    <input type="text" name="initials" id="initials" />
-  </div>
-  <br>
-  <input type="submit" value="delete" />
-</form>`
-
+  mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
+  mainTag().appendChild(document.createElement("div")).innerHTML = deleteButton()
   mainTag().appendChild(document.createElement("div")).innerHTML = `<h3 style="color:rgb(220, 161, 12">top 10</h3>`
 
+//showing all the scores and players
   for (let i = 0; i < 11; i++){
     mainTag().appendChild(document.createElement("div")).innerHTML = `<h4 style="color:rgb(140, 12, 220)">${arr[i]}</h4>`
   }
-  mainTag().appendChild(document.createElement("div")).innerHTML =   `<form id="play again">
-  <input type="submit" value="play again" />
-</form>`
+  //render play again button
+  mainTag().appendChild(document.createElement("div")).innerHTML =  playAgainButton()
 
-playAgainTag().addEventListener("click", function(e){
-  e.preventDefault
-  return resetGame()
+  deleteTag().addEventListener("click", function(e){
+    e.preventDefault
+    alert("sorry to see you go!")
+    deletePlayer()
+    return resetGame()
+  })
+  playerName().addEventListener("submit", function(e){
+    e.preventDefault
+    editPlayer(e)
+    resetMain()
+    showAll()
+    return workPlease()
 })
-deleteTag().addEventListener("click", function(e){
-  e.preventDefault
-  alert("sorry to see you go!")
-  deletePlayer()
-  return resetGame()
-
-})
+  playAgainTag().addEventListener("click", function(e){
+    e.preventDefault
+    return resetGame()
+}) 
 }
 
 function resetGame(){
@@ -423,12 +447,50 @@ function resetGame(){
 }
 
 function deletePlayer(){
-
   fetch(baseUrl + "/players/" + players[0].id, {
   method: "DELETE"
   })
 }
+
+
+
 function beCool(){
   deletePlayer()
   resetGame()
 }
+
+function finishEdit(){
+  editPlayer()
+  resetMain()
+  showAll()
+  return workPlease()
+}
+
+
+ 
+
+  function editPlayer(e) {
+    e.preventDefault();
+    let strongParams = {
+        player: {
+            name: initialsInput().value, 
+        }
+    }
+    fetch(baseUrl + "/players/" + players[0].id, {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(strongParams),
+        method: "PATCH"
+    })
+    .then( function(response) {
+        return response.json();
+    })
+    .then( function(player) {
+        players.push(player)
+    })
+    resetMain()
+    showAll()
+    return workPlease();
+  }
