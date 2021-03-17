@@ -8,10 +8,37 @@ let blobCount = 0
 let countDownDate = new Date();
 const baseUrl = 'http://localhost:3000'
 
-function Player(name) {
-  this.name = name
 
-}
+
+//finder fucntions
+const h1 = () => document.getElementById("h1")
+let tagText = (element, words) => element.innerText = words
+let gameText = () => tagText(h1(), "Welcome to Blob Game")
+const playerTag = () => document.getElementById("player")
+const namePleaseTag = () => document.getElementById("namePlease")
+const resetPlayer = () => playerTag().innerHTML = ""
+const resetMain = () => mainTag().innerHTML = ""
+
+const initialsInput = () => document.getElementById("initials")
+const timerTag = () => document.getElementById("timer")
+const main = document.getElementById("main")
+
+
+const theBlob1 = () => document.getElementById("theBlob1")
+const theBlob2 = () => document.getElementById("theBlob2")
+const theBlob3 = () => document.getElementById("theBlob3")
+const theBlob4 = () => document.getElementById("theBlob4")
+const theBlob5 = () => document.getElementById("theBlob5")
+let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount += 1}`
+let readBlobsCounter = () => blobsKilledTag().innerText
+const blobsKilledTag = () => document.getElementById("blobsKilled")
+
+let gameTag = () => document.getElementById("game")
+let mainTag = () => document.getElementById("main")
+
+const playAgainTag = () => document.getElementById("play again")
+const deleteTag = () => document.getElementById("delete")
+const playerName = () => document.getElementById("playerName")
 
 //countdown
 const sleep = (milliseconds) => {
@@ -41,32 +68,6 @@ let countdown = async () => {
 }
 
 
-
-//finder fucntions
-const h1 = () => document.getElementById("h1")
-let tagText = (element, words) => element.innerText = words
-let gameText = () => tagText(h1(), "Welcome to Blob Game")
-const playerTag = () => document.getElementById("player")
-const namePleaseTag = () => document.getElementById("namePlease")
-const resetPlayer = () => playerTag().innerHTML = ""
-const resetMain = () => mainTag().innerHTML = ""
-
-const initialsInput = () => document.getElementById("initials")
-const timerTag = () => document.getElementById("timer")
-const main = document.getElementById("main")
-
-
-const theBlob1 = () => document.getElementById("theBlob1")
-const theBlob2 = () => document.getElementById("theBlob2")
-const theBlob3 = () => document.getElementById("theBlob3")
-const theBlob4 = () => document.getElementById("theBlob4")
-const theBlob5 = () => document.getElementById("theBlob5")
-let blobsCounter = () => blobsKilledTag().innerText = `Blobs Destroyed = ${blobCount += 1}`
-let readBlobsCounter = () => blobsKilledTag().innerText
-const blobsKilledTag = () => document.getElementById("blobsKilled")
-
-let gameTag = () => document.getElementById("game")
-let mainTag = () => document.getElementById("main")
 
 //html
 let nameTemplate = () => {
@@ -147,12 +148,10 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => {
-  if (players.length == 1) {document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`}
-  else if (players.length == 2){document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[1].name}</h3>`}
-}
+let showScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
 
-function workPlease(){
+
+function gameScores(){
   scores.push(parseInt(timerTag().innerText))
   
   setTheScore()
@@ -164,7 +163,7 @@ let renderGame = () => {
   showAll()
   if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {workPlease()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {gameScores()}
 }
 
  
@@ -189,44 +188,6 @@ let renderGame = () => {
 
 
 
-//  let checkIfDestroyed = () => {document.addEventListener("click", destroyBlob())}
-
-
-// let renderGame = (level = level1()) => {gameTag().innerHTML = level}
-
-
-
-//less blob1
-// let heightPx1 = (blob) => {
-//   let b = document.getElementById(blob)
-//   let a = b.style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx1 = (blob) => {
-//   let b = document.getElementById(blob)
-
-//   let a = b.style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob1Height = (blob) => {
-//   const b = document.getElementById(blob)
-
-//   let newNum = heightPx1(b) -20 
-//   return b.style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob1Width = (blob) => {
-//   const b = document.getElementById(blob)
-
-//   let newNum = widthPx1(b) -20 
-//   return b.style.width = "" + newNum + "px" 
-// }
 
 //  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
 let heightPx1 = () => {
@@ -293,11 +254,6 @@ let lessBlob2Width = () => {
 }
 
 
-// function getPlayer() {
-//   fetch(playersURL)
-//   .then(response => response.json())
-//   .then(data => console.log(data))
-// }
 
 
 async function getPlayer() {
@@ -406,9 +362,7 @@ let showAll = () => {
 
 
 
-const playAgainTag = () => document.getElementById("play again")
-const deleteTag = () => document.getElementById("delete")
-const playerName = () => document.getElementById("playerName")
+
 
 
 function showAllScoresAndPlayers(arr){
@@ -434,7 +388,7 @@ function showAllScoresAndPlayers(arr){
     editPlayer(e)
     resetMain()
     showAll()
-    return workPlease()
+    return gameScores()
 })
   playAgainTag().addEventListener("click", function(e){
     e.preventDefault
@@ -464,7 +418,7 @@ function finishEdit(){
   editPlayer()
   resetMain()
   showAll()
-  return workPlease()
+  return gameScores()
 }
 
 
@@ -495,11 +449,13 @@ function finishEdit(){
         return showAllScoresAndPlayers(allScores)
       }
       else
+      players = []
+      scores = []
         players.push(player)
     })
     resetMain()
+    showAll()
     showScore()
-    setTheScore
     showAllScoresAndPlayers(allScores)
-    return workPlease();
+    gameScores();
   }
