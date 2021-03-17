@@ -38,6 +38,7 @@ let countdown = async () => {
 
 
 
+
 //html
 let nameTemplate = () => {
   return `
@@ -225,23 +226,29 @@ let lessBlob2Width = () => {
 
 
 
-async function getPlayer() {
-  let response = await fetch(baseUrl + "/players")
-  let data = await response.json
-  console.log(data)
-}
 
-function getScores() {
-  fetch(baseUrl + "/scores")
-  .then(response => response.json())
-  .then(data => console.log(data));
 
-}
+
+// async function getPlayer() {
+//   let response = await fetch(baseUrl + "/players")
+//   let data = await response.json
+//   console.log(data)
+// }
+
+// function getScores() {
+//   fetch(baseUrl + "/scores")
+//   .then(response => response.json())
+//   .then(data => console.log(data));
+
+// }
 
 
 
 function setThePlayer(e) {
   e.preventDefault();
+  if (initialsInput().value == ""){
+    initialsInput().value = "Beast Mode!"
+  }
   let strongParams = {
       player: {
           name: initialsInput().value, 
@@ -259,6 +266,7 @@ function setThePlayer(e) {
       return response.json();
   })
   .then( function(player) {
+    // new Player(player.name)
       players.push(player)
   })
   resetPlayer()
