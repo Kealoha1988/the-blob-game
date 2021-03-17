@@ -96,7 +96,6 @@ let editForm = () => {
   <div class="input-field">
     <input type="text" name="initials" id="initials" value="${players[0].name}" />
   </div>
-  <br>
   <input type="submit" value="change name" />
 </form>
 `
@@ -148,8 +147,10 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
-
+let showScore = () => {
+  if (players.length == 1) {document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`}
+  else if (players.length == 2){document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[1].name}</h3>`}
+}
 
 function workPlease(){
   scores.push(parseInt(timerTag().innerText))
@@ -488,9 +489,17 @@ function finishEdit(){
         return response.json();
     })
     .then( function(player) {
+      if (player.name == "has already been taken"){
+        alert("sorry that name is taken!")
+        setTheScore()
+        return showAllScoresAndPlayers(allScores)
+      }
+      else
         players.push(player)
     })
     resetMain()
-    showAll()
+    showScore()
+    setTheScore
+    showAllScoresAndPlayers(allScores)
     return workPlease();
   }
