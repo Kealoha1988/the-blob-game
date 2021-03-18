@@ -118,7 +118,7 @@ let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
+let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
 
 
 function gameScores(){
@@ -126,7 +126,9 @@ function gameScores(){
   
   setTheScore()
 
- showAllScoresAndPlayers(allScores)
+  renderEditForm()
+
+ renderGameFinish(allScores)
 }
 
 let renderGame = () => {
@@ -136,7 +138,8 @@ let renderGame = () => {
   else if (readBlobsCounter() == "Blobs Destroyed = 3") {gameScores()}
 }
 
- 
+
+
  let checkIfBlobDestroyed = () => {
    
    if (theBlob1().style.width == "0px") {
@@ -229,21 +232,6 @@ let lessBlob2Width = () => {
 
 
 
-// async function getPlayer() {
-//   let response = await fetch(baseUrl + "/players")
-//   let data = await response.json
-//   console.log(data)
-// }
-
-// function getScores() {
-//   fetch(baseUrl + "/scores")
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-
-// }
-
-
-
 function setThePlayer(e) {
   e.preventDefault();
   if (initialsInput().value == ""){
@@ -298,7 +286,7 @@ function setTheScore() {
   })
   resetMain()
 
-  return showScore();
+  return showPlayerScore();
 }
 
 
@@ -315,11 +303,11 @@ function setTheScore() {
 
   document.addEventListener("DOMContentLoaded", function () {
   gameText()
-  renderForm()
+  renderNameForm()
 });
   
 
-let renderForm = () => {
+let renderNameForm = () => {
   resetPlayer();
   playerTag().innerHTML = nameTemplate();
   playerName().addEventListener("submit", setThePlayer);
@@ -327,11 +315,11 @@ let renderForm = () => {
 
 h1().style.color = "grey"
 // gameText()
-// renderForm()
+// renderNameForm()
 
 // clickBlob()
 
-let showAll = () => {
+let showAll = () => { 
   fetch(baseUrl + "/scores")
   .then(response => response.json())
   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
@@ -342,8 +330,8 @@ let showAll = () => {
 
 
 
-function showAllScoresAndPlayers(arr){
-  mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
+function renderGameFinish(arr){
+  
   mainTag().appendChild(document.createElement("div")).innerHTML = deleteButton()
   mainTag().appendChild(document.createElement("div")).innerHTML = `<h3 style="color:rgb(220, 161, 12">top 10</h3>`
 
@@ -360,13 +348,7 @@ function showAllScoresAndPlayers(arr){
     deletePlayer()
     return resetGame()
   })
-  playerName().addEventListener("submit", function(e){
-    e.preventDefault
-    editPlayer(e)
-    resetMain()
-    showAll()
-    return gameScores()
-})
+
   playAgainTag().addEventListener("click", function(e){
     e.preventDefault
     return resetGame()
@@ -375,7 +357,7 @@ function showAllScoresAndPlayers(arr){
 
 function resetGame(){
     gameText()
-    renderForm()
+    renderNameForm()
 }
 
 function deletePlayer(){
@@ -385,19 +367,23 @@ function deletePlayer(){
 }
 
 
+let renderEditForm = () => {
+  mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
+  playerName().addEventListener("submit", function(e){
+    e.preventDefault
+    editPlayer(e)
 
-function beCool(){
-  deletePlayer()
-  resetGame()
+})
+
 }
 
-function finishEdit(){
-  editPlayer()
+
+function finishThis(){
   resetMain()
-  showAll()
-  return gameScores()
+  showPlayerScore()
+  renderEditForm()
+  renderGameFinish(allScores)
 }
-
 
  
 
@@ -422,17 +408,16 @@ function finishEdit(){
     .then( function(player) {
       if (player.name == "has already been taken"){
         alert("sorry that name is taken!")
-        setTheScore()
-        return showAllScoresAndPlayers(allScores)
+        showPlayerScore()
+        renderEditForm()
+        return renderGameFinish(allScores)
       }
       else
+      allScores = []
+      showAll()
       players = []
-      scores = []
-        players.push(player)
-    })
-    resetMain()
-    showAll()
-    showScore()
-    showAllScoresAndPlayers(allScores)
-    gameScores();
-  }
+      players.push(player)
+      setTimeout(() => {finishThis()}, 500)
+      })
+}
+
