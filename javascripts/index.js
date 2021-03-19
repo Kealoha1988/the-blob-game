@@ -50,7 +50,7 @@ let nameTemplate = () => {
   <p style="color:rgb(255, 147, 147)"> and good luck!</p>
   </div>
   <br>
-  <h3 id="namePlease" class="inits">Your Initials</h3>
+  <h3 id="namePlease" class="inits">Your Name</h3>
   <form id="playerName">
     <div class="input-field">
       <input type="text" name="initials" id="initials" />

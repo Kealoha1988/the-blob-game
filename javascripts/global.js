@@ -30,3 +30,6 @@ let mainTag = () => document.getElementById("main")
 const playAgainTag = () => document.getElementById("play again")
 const deleteTag = () => document.getElementById("delete")
 const playerName = () => document.getElementById("playerName")
+
+
+let villain = this.setDiv()
