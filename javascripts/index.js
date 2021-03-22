@@ -16,7 +16,7 @@ const sleep = (milliseconds) => {
 
 let makeLongList = () => {
   a = []
-  for (i = 0; i < 61; i ++){
+  for (i = 0; i < 90; i ++){
     a.push(i)
   }
   return a.reverse()
@@ -25,15 +25,24 @@ let makeLongList = () => {
 let list = makeLongList()
 
 let countdown = async () => {
-  for (let item of list) {
+  for (let num of list) {
     await sleep(1000)
-    checkIfBlobDestroyed()
-    checkIfBlobDestroyed2()
-     timerTag().innerText = item    
+    firstVillain.checkIfBlobDestroyed()
+    secondVillain.checkIfBlobDestroyed()
+    thirdVillain.checkIfBlobDestroyed()
+    forthVillain.checkIfBlobDestroyed() 
+    fifthVillain.checkIfBlobDestroyed()
+     timerTag().innerText = num   
   }
-  if (timerTag().innerText = "0"){
-    return timerTag().innerText = "GAME OVER"
-  }
+  // if (timerTag().innerText = "0"){
+  //   timerTag().innerText = "GAME OVER"
+  //   await sleep(2000)
+    
+  //   alert("and the internet was no more....")
+    
+  //   await sleep(2000)
+  //  resetMain()
+  // }
 }
 
 
@@ -106,13 +115,90 @@ let level2 = () => {
 }
 
 
+let level3 = () => {
+  return `
+  <div id="game" class="parent">
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  </div>
+  `
+}
+
+let level4 = () => {
+  return `
+  <div id="game" class="parent">
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px; height: 200px; width 200px"></div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  </div>
+  `
+}
+
+let level5 = () => {
+  return `
+
+  <div id="game" class="parent">
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob4" class="child-4" style="bottom: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob5" class="child-5" style="bottom: 200px; left: 200px; height: 200px; width 200px"></div>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  </div>
+  `}
+
+
 
 
   let renderLevel2 = () => {
     level2() 
-    clickBlob1()
-    clickBlob2()
+    // clickBlob1()
+    // clickBlob2()
+    firstVillain.smiteVillain()
+    secondVillain.smiteVillain()
+
   }
+
+  let renderLevel3 = () => {
+    level3()
+    // clickBlob1()
+    // clickBlob2()
+    // clickBlob3()
+    firstVillain.smiteVillain()
+    secondVillain.smiteVillain()
+    thirdVillain.smiteVillain()
+  }
+  let renderLevel4 = () => {
+    level4()
+    // clickBlob1()
+    // clickBlob2()
+    // clickBlob3()
+    // clickBlob4()
+    firstVillain.smiteVillain()
+    secondVillain.smiteVillain()
+    thirdVillain.smiteVillain()
+    forthVillain.smiteVillain()
+  }
+let renderLevel5 = () => {
+  level5()
+  // clickBlob1()
+  // clickBlob2()
+  // clickBlob3()
+  // clickBlob4()
+  // clickBlob5()
+  firstVillain.smiteVillain()
+  secondVillain.smiteVillain()
+  thirdVillain.smiteVillain()
+  forthVillain.smiteVillain()
+  fifthVillain.smiteVillain()
+}
+
+
+
 
 let currentLevel = (level) => {
   return gameTag().innerHTML = level
@@ -123,108 +209,220 @@ let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 sty
 
 function gameScores(){
   scores.push(parseInt(timerTag().innerText))
-  
   setTheScore()
-
   renderEditForm()
-
- renderGameFinish(allScores)
+  renderGameFinish(allScores)
 }
+
 
 let renderGame = () => {
   showAll()
-  if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && clickBlob1()}
+  if (timerTag().innerText === "GAME OVER"){alert("better luck next time!")}
+  else if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && firstVillain.smiteVillain()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
-  else if (readBlobsCounter() == "Blobs Destroyed = 3") {gameScores()}
-}
-
-
-
- let checkIfBlobDestroyed = () => {
-   
-   if (theBlob1().style.width == "0px") {
-     blobsCounter()
-     renderGame()
-     setTimeout(() => {theBlob1().style.width = ""}, 500)
-   }
- }
-
- let checkIfBlobDestroyed2 = () => {
+  else if (readBlobsCounter() == "Blobs Destroyed = 3") {currentLevel(level3()) && renderLevel3()}
   
-  if (theBlob2()?.style.width == "0px") {
-    blobsCounter()
-    renderGame()
-    setTimeout(() => {theBlob2().style.width = ""}, 500)
-  }
+  else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4()) && renderLevel4()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5()) && renderLevel5()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 15") {gameScores()}
+  
 }
 
 
 
+//  let checkIfBlobDestroyed = () => {
+   
+//    if (theBlob1().style.width == "0px") {
+//      blobsCounter()
+//      renderGame()
+//      setTimeout(() => {theBlob1().style.width = ""}, 500)
+//    }
+//  }
 
+//  let checkIfBlobDestroyed2 = () => {
+  
+//   if (theBlob2()?.style.width == "0px") {
+//     blobsCounter()
+//     renderGame()
+//     setTimeout(() => {theBlob2().style.width = ""}, 500)
+//   }
+// }
+
+
+// let checkIfBlobDestroyed3 = () => {
+  
+//   if (theBlob3()?.style.width == "0px") {
+//     blobsCounter()
+//     renderGame()
+//     setTimeout(() => {theBlob3().style.width = ""}, 500)
+//   }
+// }
+// let checkIfBlobDestroyed4 = () => {
+ 
+//  if (theBlob4()?.style.width == "0px") {
+//    blobsCounter()
+//    renderGame()
+//    setTimeout(() => {theBlob4().style.width = ""}, 500)
+//  }
+// }
+// let checkIfBlobDestroyed5 = () => {
+ 
+//   if (theBlob5()?.style.width == "0px") {
+//     blobsCounter()
+//     renderGame()
+//     setTimeout(() => {theBlob5().style.width = ""}, 500)
+//   }
+//  }
+
+
+
+
+
+
+
+
+// //  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
+// let heightPx1 = () => {
+//   let a = theBlob1().style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
+
+// let widthPx1 = () => {
+//   let a = theBlob1().style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
+
+// let lessBlob1Height = () => {
+//   let newNum = heightPx1() -20 
+//   return theBlob1().style.height = "" + newNum + "px" 
+// }
+
+// let lessBlob1Width = () => {
+//   let newNum = widthPx1() -20 
+//   return theBlob1().style.width = "" + newNum + "px" 
+// }
 
 //  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
-let heightPx1 = () => {
-  let a = theBlob1().style.height.split("")
-    a.splice(-2, 2)
-    let num = parseInt(a.join(""))
-    return num
-}
-
-let widthPx1 = () => {
-  let a = theBlob1().style.height.split("")
-  a.splice(-2, 2)
-  let num = parseInt(a.join(""))
-  return num
-}
-
-let lessBlob1Height = () => {
-  let newNum = heightPx1() -20 
-  return theBlob1().style.height = "" + newNum + "px" 
-}
-
-let lessBlob1Width = () => {
-  let newNum = widthPx1() -20 
-  return theBlob1().style.width = "" + newNum + "px" 
-}
-
- let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
 
 
 
- //less blob2
-let heightPx2 = () => {
-  let a = theBlob2().style.height.split("")
-    a.splice(-2, 2)
-    let num = parseInt(a.join(""))
-    return num
-}
+//  //less blob2
+// let heightPx2 = () => {
+//   let a = theBlob2().style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
 
-let widthPx2 = () => {
-  let a = theBlob2().style.height.split("")
-  a.splice(-2, 2)
-  let num = parseInt(a.join(""))
-  return num
-}
+// let widthPx2 = () => {
+//   let a = theBlob2().style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
 
-let lessBlob2Height = () => {
-  let newNum = heightPx2() -20 
-  return theBlob2().style.height = "" + newNum + "px" 
-}
+// let lessBlob2Height = () => {
+//   let newNum = heightPx2() -20 
+//   return theBlob2().style.height = "" + newNum + "px" 
+// }
 
-let lessBlob2Width = () => {
-  let newNum = widthPx2() -20 
-  return theBlob2().style.width = "" + newNum + "px" 
-}
+// let lessBlob2Width = () => {
+//   let newNum = widthPx2() -20 
+//   return theBlob2().style.width = "" + newNum + "px" 
+// }
 
- let lessBlob2 = () => lessBlob2Height() && lessBlob2Width()
+//  let lessBlob2 = () => lessBlob2Height() && lessBlob2Width()
 
- function shrinkBlob(blob){
-  // const b = document.getElementById(blob)
-  heightPx1(blob)
-  widthPx1(blob)
-  lessBlob1Height(blob)
-  lessBlob1Width(blob)
-}
+//  //less blob3
+// let heightPx3 = () => {
+//   let a = theBlob3().style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
+
+// let widthPx3 = () => {
+//   let a = theBlob3().style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
+
+// let lessBlob3Height = () => {
+//   let newNum = heightPx3() -20 
+//   return theBlob3().style.height = "" + newNum + "px" 
+// }
+
+// let lessBlob3Width = () => {
+//   let newNum = widthPx3() -20 
+//   return theBlob3().style.width = "" + newNum + "px" 
+// }
+
+//  let lessBlob3 = () => lessBlob3Height() && lessBlob3Width()
+
+//  //less blob4
+// let heightPx4 = () => {
+//   let a = theBlob4().style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
+
+// let widthPx4 = () => {
+//   let a = theBlob4().style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
+
+// let lessBlob4Height = () => {
+//   let newNum = heightPx4() -20 
+//   return theBlob4().style.height = "" + newNum + "px" 
+// }
+
+// let lessBlob4Width = () => {
+//   let newNum = widthPx4() -20 
+//   return theBlob4().style.width = "" + newNum + "px" 
+// }
+
+//  let lessBlob4 = () => lessBlob4Height() && lessBlob4Width()
+
+//   //less blob5
+// let heightPx5 = () => {
+//   let a = theBlob5().style.height.split("")
+//     a.splice(-2, 2)
+//     let num = parseInt(a.join(""))
+//     return num
+// }
+
+// let widthPx5 = () => {
+//   let a = theBlob5().style.height.split("")
+//   a.splice(-2, 2)
+//   let num = parseInt(a.join(""))
+//   return num
+// }
+
+// let lessBlob5Height = () => {
+//   let newNum = heightPx5() -20 
+//   if (theBlob5().style.height == "20px"){
+//     return blobsCounter()
+//   }
+//   else
+//   return theBlob5().style.height = "" + newNum + "px" 
+// }
+
+// let lessBlob5Width = () => {
+//   let newNum = widthPx5() -20 
+//   return theBlob5().style.width = "" + newNum + "px" 
+// }
+
+//  let lessBlob5 = () => lessBlob5Height() && lessBlob5Width()
+
+
 
 
 
@@ -293,6 +491,9 @@ function setTheScore() {
 //click blobs
  let clickBlob1 = () => theBlob1().addEventListener("click", lessBlob1)
  let clickBlob2 = () => theBlob2().addEventListener("click", lessBlob2)
+ let clickBlob3 = () => theBlob3().addEventListener("click", lessBlob3)
+ let clickBlob4 = () => theBlob4().addEventListener("click", lessBlob4)
+ let clickBlob5 = () => theBlob5().addEventListener("click", lessBlob5)
 
 
 
@@ -313,11 +514,9 @@ let renderNameForm = () => {
   playerName().addEventListener("submit", setThePlayer);
 }
 
-h1().style.color = "grey"
-// gameText()
-// renderNameForm()
 
-// clickBlob()
+
+
 
 let showAll = () => { 
   fetch(baseUrl + "/scores")

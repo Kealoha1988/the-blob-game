@@ -32,4 +32,12 @@ const deleteTag = () => document.getElementById("delete")
 const playerName = () => document.getElementById("playerName")
 
 
-let villain = this.setDiv()
+
+let firstVillain = new Villain("theBlob1")
+let secondVillain = new Villain("theBlob2")
+let thirdVillain = new Villain("theBlob3")
+let forthVillain = new Villain("theBlob4")
+let fifthVillain = new Villain("theBlob5")
+
+
+h1().style.color = "grey"
