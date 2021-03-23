@@ -7,7 +7,7 @@ let tagText = (element, words) => element.innerText = words
 let gameText = () => tagText(h1(), "Welcome to Blob Game")
 const playerTag = () => document.getElementById("player")
 const namePleaseTag = () => document.getElementById("namePlease")
-const resetPlayer = () => playerTag().innerHTML = ""
+const resetPlayerTag = () => playerTag().innerHTML = ""
 const resetMain = () => mainTag().innerHTML = ""
 
 const initialsInput = () => document.getElementById("initials")
@@ -31,13 +31,21 @@ const playAgainTag = () => document.getElementById("play again")
 const deleteTag = () => document.getElementById("delete")
 const playerName = () => document.getElementById("playerName")
 
+const currentPlayer = () => {
+  if (Player.all[0]){
+    return Player.all[0]
+  }
+}
 
 
-let firstVillain = new Villain("theBlob1")
-let secondVillain = new Villain("theBlob2")
-let thirdVillain = new Villain("theBlob3")
-let forthVillain = new Villain("theBlob4")
-let fifthVillain = new Villain("theBlob5")
+
+const firstVillain = new Villain("theBlob1")
+const secondVillain = new Villain("theBlob2")
+const thirdVillain = new Villain("theBlob3")
+const forthVillain = new Villain("theBlob4")
+const fifthVillain = new Villain("theBlob5")
+
+
 
 
 h1().style.color = "grey"

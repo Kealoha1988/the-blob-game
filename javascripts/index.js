@@ -1,7 +1,5 @@
 //variables
-let players = []
 let scores = []
-let numArray = [1, 2, 3 ,4]
 let allPlayers = []
 let allScores = []
 let blobCount = 0
@@ -34,15 +32,15 @@ let countdown = async () => {
     fifthVillain.checkIfBlobDestroyed()
      timerTag().innerText = num   
   }
-  // if (timerTag().innerText = "0"){
-  //   timerTag().innerText = "GAME OVER"
-  //   await sleep(2000)
+  if (timerTag().innerText = "0"){
+    timerTag().innerText = "GAME OVER"
+    await sleep(2000)
     
-  //   alert("and the internet was no more....")
+    alert("and the internet was no more....")
     
-  //   await sleep(2000)
-  //  resetMain()
-  // }
+    await sleep(2000)
+   resetMain()
+  }
 }
 
 
@@ -54,7 +52,7 @@ let nameTemplate = () => {
   <div class="contianer">
   <p style="color:rgb(12, 220, 206)">There are Blobs taking over the internet!</p>
   <p style="color:rgb(220, 161, 12)">Destroy them by clicking on them untill they disapear.</p>
-  <p style="color:rgb(140, 12, 220)">There is only a minute left before it's too late!</p>
+  <p style="color:rgb(140, 12, 220)">There is only a minute and a half left before it's too late!</p>
   <p style="color:rgb(210, 210, 210)">If you are up to the challange please enter your name...</p>
   <p style="color:rgb(255, 147, 147)"> and good luck!</p>
   </div>
@@ -72,9 +70,9 @@ let nameTemplate = () => {
 
 let editForm = () => {
   return `
-  <form id="playerName" data-id="${players[0].id}">
+  <form id="playerName" data-id="${currentPlayer().id}">
   <div class="input-field">
-    <input type="text" name="initials" id="initials" value="${players[0].name}" />
+    <input type="text" name="initials" id="initials" value="${currentPlayer().name}" />
   </div>
   <input type="submit" value="change name" />
 </form>
@@ -152,44 +150,29 @@ let level5 = () => {
   `}
 
 
-
-
   let renderLevel2 = () => {
-    level2() 
-    // clickBlob1()
-    // clickBlob2()
+    level2()   
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
-
   }
 
   let renderLevel3 = () => {
     level3()
-    // clickBlob1()
-    // clickBlob2()
-    // clickBlob3()
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
     thirdVillain.smiteVillain()
   }
+
   let renderLevel4 = () => {
     level4()
-    // clickBlob1()
-    // clickBlob2()
-    // clickBlob3()
-    // clickBlob4()
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
     thirdVillain.smiteVillain()
     forthVillain.smiteVillain()
   }
+
 let renderLevel5 = () => {
   level5()
-  // clickBlob1()
-  // clickBlob2()
-  // clickBlob3()
-  // clickBlob4()
-  // clickBlob5()
   firstVillain.smiteVillain()
   secondVillain.smiteVillain()
   thirdVillain.smiteVillain()
@@ -197,26 +180,23 @@ let renderLevel5 = () => {
   fifthVillain.smiteVillain()
 }
 
-
-
-
 let currentLevel = (level) => {
   return gameTag().innerHTML = level
 } 
 
-let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${60 - scores[0]} seconds, player: ${players[0].name}</h3>`
 
+//score methods
+let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${90 - scores[0]} seconds, player: ${currentPlayer().name}</h3>`
 
 function gameScores(){
   scores.push(parseInt(timerTag().innerText))
-  setTheScore()
+  Score.setTheScore()
   renderEditForm()
-  renderGameFinish(allScores)
+  renderGameFinish(Score.all)
 }
 
-
 let renderGame = () => {
-  showAll()
+  Score.showAll()
   if (timerTag().innerText === "GAME OVER"){alert("better luck next time!")}
   else if (readBlobsCounter() == "Blobs Destroyed = 0") {currentLevel(level1()) && firstVillain.smiteVillain()}
   else if (readBlobsCounter() == "Blobs Destroyed = 1") {currentLevel(level2()) && renderLevel2()} 
@@ -229,276 +209,35 @@ let renderGame = () => {
 }
 
 
+//fetches
 
-//  let checkIfBlobDestroyed = () => {
-   
-//    if (theBlob1().style.width == "0px") {
-//      blobsCounter()
-//      renderGame()
-//      setTimeout(() => {theBlob1().style.width = ""}, 500)
-//    }
-//  }
 
-//  let checkIfBlobDestroyed2 = () => {
-  
-//   if (theBlob2()?.style.width == "0px") {
-//     blobsCounter()
-//     renderGame()
-//     setTimeout(() => {theBlob2().style.width = ""}, 500)
+
+// function setTheScore() {
+//   let strongParams = {
+//       score: {
+//           time: scores[0], 
+//       }
 //   }
-// }
-
-
-// let checkIfBlobDestroyed3 = () => {
-  
-//   if (theBlob3()?.style.width == "0px") {
-//     blobsCounter()
-//     renderGame()
-//     setTimeout(() => {theBlob3().style.width = ""}, 500)
-//   }
-// }
-// let checkIfBlobDestroyed4 = () => {
- 
-//  if (theBlob4()?.style.width == "0px") {
-//    blobsCounter()
-//    renderGame()
-//    setTimeout(() => {theBlob4().style.width = ""}, 500)
-//  }
-// }
-// let checkIfBlobDestroyed5 = () => {
- 
-//   if (theBlob5()?.style.width == "0px") {
-//     blobsCounter()
-//     renderGame()
-//     setTimeout(() => {theBlob5().style.width = ""}, 500)
-//   }
-//  }
-
-
-
-
-
-
-
-
-// //  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
-// let heightPx1 = () => {
-//   let a = theBlob1().style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx1 = () => {
-//   let a = theBlob1().style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob1Height = () => {
-//   let newNum = heightPx1() -20 
-//   return theBlob1().style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob1Width = () => {
-//   let newNum = widthPx1() -20 
-//   return theBlob1().style.width = "" + newNum + "px" 
-// }
-
-//  let lessBlob1 = () => lessBlob1Height() && lessBlob1Width()
-
-
-
-//  //less blob2
-// let heightPx2 = () => {
-//   let a = theBlob2().style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx2 = () => {
-//   let a = theBlob2().style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob2Height = () => {
-//   let newNum = heightPx2() -20 
-//   return theBlob2().style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob2Width = () => {
-//   let newNum = widthPx2() -20 
-//   return theBlob2().style.width = "" + newNum + "px" 
-// }
-
-//  let lessBlob2 = () => lessBlob2Height() && lessBlob2Width()
-
-//  //less blob3
-// let heightPx3 = () => {
-//   let a = theBlob3().style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx3 = () => {
-//   let a = theBlob3().style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob3Height = () => {
-//   let newNum = heightPx3() -20 
-//   return theBlob3().style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob3Width = () => {
-//   let newNum = widthPx3() -20 
-//   return theBlob3().style.width = "" + newNum + "px" 
-// }
-
-//  let lessBlob3 = () => lessBlob3Height() && lessBlob3Width()
-
-//  //less blob4
-// let heightPx4 = () => {
-//   let a = theBlob4().style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx4 = () => {
-//   let a = theBlob4().style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob4Height = () => {
-//   let newNum = heightPx4() -20 
-//   return theBlob4().style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob4Width = () => {
-//   let newNum = widthPx4() -20 
-//   return theBlob4().style.width = "" + newNum + "px" 
-// }
-
-//  let lessBlob4 = () => lessBlob4Height() && lessBlob4Width()
-
-//   //less blob5
-// let heightPx5 = () => {
-//   let a = theBlob5().style.height.split("")
-//     a.splice(-2, 2)
-//     let num = parseInt(a.join(""))
-//     return num
-// }
-
-// let widthPx5 = () => {
-//   let a = theBlob5().style.height.split("")
-//   a.splice(-2, 2)
-//   let num = parseInt(a.join(""))
-//   return num
-// }
-
-// let lessBlob5Height = () => {
-//   let newNum = heightPx5() -20 
-//   if (theBlob5().style.height == "20px"){
-//     return blobsCounter()
-//   }
-//   else
-//   return theBlob5().style.height = "" + newNum + "px" 
-// }
-
-// let lessBlob5Width = () => {
-//   let newNum = widthPx5() -20 
-//   return theBlob5().style.width = "" + newNum + "px" 
-// }
-
-//  let lessBlob5 = () => lessBlob5Height() && lessBlob5Width()
-
-
-
-
-
-
-
-
-
-function setThePlayer(e) {
-  e.preventDefault();
-  if (initialsInput().value == ""){
-    initialsInput().value = "Beast Mode!"
-  }
-  let strongParams = {
-      player: {
-          name: initialsInput().value, 
-      }
-  }
-  fetch(baseUrl + "/players", {
-      headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(strongParams),
-      method: "POST"
-  })
-  .then( function(response) {
-      return response.json();
-  })
-  .then( function(player) {
-    // new Player(player.name)
-      players.push(player)
-  })
-  resetPlayer()
-  return tagText(h1(), "Lets Play The Blob Game!") && countdown() && renderGame();
-}
-
-
-
-function setTheScore() {
-  let strongParams = {
-      score: {
-          time: scores[0], 
-      }
-  }
-  fetch(baseUrl + "/scores", {
-      headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(strongParams),
-      method: "POST"
-  })
-  .then( function(response) {
-      return response.json();
-  })
-  .then( function(score) {
-      scores.push(score)
+//   fetch(baseUrl + "/scores", {
+//       headers: {
+//           "Accept": "application/json",
+//           "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(strongParams),
+//       method: "POST"
+//   })
+//   .then( function(response) {
+//       return response.json();
+//   })
+//   .then( function(score) {
+//       scores.push(score)
      
-  })
-  resetMain()
+//   })
+//   resetMain()
 
-  return showPlayerScore();
-}
-
-
-//click blobs
- let clickBlob1 = () => theBlob1().addEventListener("click", lessBlob1)
- let clickBlob2 = () => theBlob2().addEventListener("click", lessBlob2)
- let clickBlob3 = () => theBlob3().addEventListener("click", lessBlob3)
- let clickBlob4 = () => theBlob4().addEventListener("click", lessBlob4)
- let clickBlob5 = () => theBlob5().addEventListener("click", lessBlob5)
-
-
-
-
-
+//   return showPlayerScore();
+// }
 
 
 
@@ -509,23 +248,18 @@ function setTheScore() {
   
 
 let renderNameForm = () => {
-  resetPlayer();
+  resetPlayerTag();
   playerTag().innerHTML = nameTemplate();
-  playerName().addEventListener("submit", setThePlayer);
+  playerName().addEventListener("submit", Player.findOrCreatePlayer);
 }
 
 
 
-
-
-let showAll = () => { 
-  fetch(baseUrl + "/scores")
-  .then(response => response.json())
-  .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
-}
-
-
-
+// let showAll = () => { 
+//   fetch(baseUrl + "/scores")
+//   .then(response => response.json())
+//   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
+// }
 
 
 
@@ -544,7 +278,7 @@ function renderGameFinish(arr){
   deleteTag().addEventListener("click", function(e){
     e.preventDefault
     alert("sorry to see you go!")
-    deletePlayer()
+    currentPlayer().delete()
     return resetGame()
   })
 
@@ -559,21 +293,15 @@ function resetGame(){
     renderNameForm()
 }
 
-function deletePlayer(){
-  fetch(baseUrl + "/players/" + players[0].id, {
-  method: "DELETE"
-  })
-}
 
 
 let renderEditForm = () => {
   mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
   playerName().addEventListener("submit", function(e){
     e.preventDefault
-    editPlayer(e)
+    currentPlayer().edit(e)
 
 })
-
 }
 
 
@@ -585,38 +313,4 @@ function finishThis(){
 }
 
  
-
-  function editPlayer(e) {
-    e.preventDefault();
-    let strongParams = {
-        player: {
-            name: initialsInput().value, 
-        }
-    }
-    fetch(baseUrl + "/players/" + players[0].id, {
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(strongParams),
-        method: "PATCH"
-    })
-    .then( function(response) {
-        return response.json();
-    })
-    .then( function(player) {
-      if (player.name == "has already been taken"){
-        alert("sorry that name is taken!")
-        showPlayerScore()
-        renderEditForm()
-        return renderGameFinish(allScores)
-      }
-      else
-      allScores = []
-      showAll()
-      players = []
-      players.push(player)
-      setTimeout(() => {finishThis()}, 500)
-      })
-}
 
