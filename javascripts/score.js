@@ -36,7 +36,7 @@ static setTheScore() {
 static showAll = () => { 
   fetch(baseUrl + "/scores")
   .then(response => response.json())
-  .then(data => data.forEach(data =>  Score.all.push(`${data.player.name} time of ${60 - data.time} seconds`)))
+  .then(data => data.forEach(data =>  Score.all.push(`${data.player.name} saved the world with ${90 - data.time} seconds to spare`)))
 }
 
 

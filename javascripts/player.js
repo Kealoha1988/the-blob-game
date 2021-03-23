@@ -26,6 +26,23 @@ class Player {
 
 
 
+
+static renderNameForm = () => {
+  resetPlayerTag();
+  playerTag().innerHTML = nameTemplate();
+  playerName().addEventListener("submit", Player.findOrCreatePlayer);
+}
+
+static renderEditForm = () => {
+  mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
+  playerName().addEventListener("submit", function(e){
+    e.preventDefault
+    currentPlayer().edit(e)
+})
+}
+
+
+
   static findOrCreatePlayer(e) {
     e.preventDefault();
     if (initialsInput().value == ""){
@@ -82,8 +99,8 @@ class Player {
         return renderGameFinish(allScores)
       }
       else
-      allScores = []
-      showAll()
+      Score.all = []
+      Score.showAll()
       Player.all = []
       Player.readyPlayerOne(data)
       setTimeout(() => {finishThis()}, 500)
@@ -97,7 +114,7 @@ class Player {
     method: "DELETE"
     })
   }
-  
+
 
 
 }

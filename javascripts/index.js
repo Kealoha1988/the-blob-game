@@ -1,9 +1,6 @@
 //variables
 let scores = []
-let allPlayers = []
-let allScores = []
 let blobCount = 0
-let countDownDate = new Date();
 const baseUrl = 'http://localhost:3000'
 
 
@@ -28,7 +25,7 @@ let countdown = async () => {
     firstVillain.checkIfBlobDestroyed()
     secondVillain.checkIfBlobDestroyed()
     thirdVillain.checkIfBlobDestroyed()
-    forthVillain.checkIfBlobDestroyed() 
+    fourthVillain.checkIfBlobDestroyed() 
     fifthVillain.checkIfBlobDestroyed()
      timerTag().innerText = num   
   }
@@ -42,8 +39,6 @@ let countdown = async () => {
    resetMain()
   }
 }
-
-
 
 
 //html
@@ -150,6 +145,7 @@ let level5 = () => {
   `}
 
 
+
   let renderLevel2 = () => {
     level2()   
     firstVillain.smiteVillain()
@@ -168,7 +164,7 @@ let level5 = () => {
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
     thirdVillain.smiteVillain()
-    forthVillain.smiteVillain()
+    fourthVillain.smiteVillain()
   }
 
 let renderLevel5 = () => {
@@ -176,7 +172,7 @@ let renderLevel5 = () => {
   firstVillain.smiteVillain()
   secondVillain.smiteVillain()
   thirdVillain.smiteVillain()
-  forthVillain.smiteVillain()
+  fourthVillain.smiteVillain()
   fifthVillain.smiteVillain()
 }
 
@@ -186,12 +182,12 @@ let currentLevel = (level) => {
 
 
 //score methods
-let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time: ${90 - scores[0]} seconds, player: ${currentPlayer().name}</h3>`
+let showPlayerScore = () => document.getElementById("main").innerHTML = `<h3 style="color:rgb(12, 220, 206)">time; ${90 - scores[0]} seconds to spare, player: ${currentPlayer().name}</h3>`
 
 function gameScores(){
   scores.push(parseInt(timerTag().innerText))
   Score.setTheScore()
-  renderEditForm()
+  Player.renderEditForm()
   renderGameFinish(Score.all)
 }
 
@@ -209,59 +205,6 @@ let renderGame = () => {
 }
 
 
-//fetches
-
-
-
-// function setTheScore() {
-//   let strongParams = {
-//       score: {
-//           time: scores[0], 
-//       }
-//   }
-//   fetch(baseUrl + "/scores", {
-//       headers: {
-//           "Accept": "application/json",
-//           "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(strongParams),
-//       method: "POST"
-//   })
-//   .then( function(response) {
-//       return response.json();
-//   })
-//   .then( function(score) {
-//       scores.push(score)
-     
-//   })
-//   resetMain()
-
-//   return showPlayerScore();
-// }
-
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-  gameText()
-  renderNameForm()
-});
-  
-
-let renderNameForm = () => {
-  resetPlayerTag();
-  playerTag().innerHTML = nameTemplate();
-  playerName().addEventListener("submit", Player.findOrCreatePlayer);
-}
-
-
-
-// let showAll = () => { 
-//   fetch(baseUrl + "/scores")
-//   .then(response => response.json())
-//   .then(data => data.forEach(data =>  allScores.push(`${data.player.name} time of ${60 - data.time} seconds`)))
-// }
-
-
 
 function renderGameFinish(arr){
   
@@ -272,6 +215,7 @@ function renderGameFinish(arr){
   for (let i = 0; i < 11; i++){
     mainTag().appendChild(document.createElement("div")).innerHTML = `<h4 style="color:rgb(140, 12, 220)">${arr[i]}</h4>`
   }
+  
   //render play again button
   mainTag().appendChild(document.createElement("div")).innerHTML =  playAgainButton()
 
@@ -290,27 +234,28 @@ function renderGameFinish(arr){
 
 function resetGame(){
     gameText()
-    renderNameForm()
+    Player.renderNameForm()
 }
 
 
 
-let renderEditForm = () => {
-  mainTag().appendChild(document.createElement("div")).innerHTML = editForm()
-  playerName().addEventListener("submit", function(e){
-    e.preventDefault
-    currentPlayer().edit(e)
 
-})
-}
 
 
 function finishThis(){
   resetMain()
   showPlayerScore()
-  renderEditForm()
-  renderGameFinish(allScores)
+  Player.renderEditForm()
+  renderGameFinish(Score.all)
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  gameText()
+  Player.renderNameForm()
+});
 
  
 
