@@ -2,8 +2,9 @@
 let scores = []
 let blobCount = 0
 const baseUrl = 'http://localhost:3000'
-
-
+let shellDrop = new Audio('https://www.soundjay.com/button/sounds/button-7.mp3')
+let gameMusic = new Audio('https://www.soundjay.com/free-music/sounds/destination-01.mp')
+let youWinSound = new Audio("https://www.soundjay.com/misc/sounds/dream-harp-01.mp3")
 //countdown
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -111,13 +112,14 @@ let level2 = () => {
 let level3 = () => {
   return `
   <div id="game" class="parent">
-  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px"></div>
+  <div id="theBlob1" class="child-1"style="top: 0px; left: 0px; height: 200px; width 200px" ></div>
   <div id="theBlob2" class="child-2" style="bottom: 0px; right: 0px; height: 200px; width 200px"></div>
   <div id="theBlob3" class="child-3" style="top: 0px; right: 0px; height: 200px; width 200px"></div>
   <link rel="stylesheet" type="text/css" href="index.css">
   </div>
   `
 }
+
 
 let level4 = () => {
   return `
@@ -147,7 +149,8 @@ let level5 = () => {
 
 
   let renderLevel2 = () => {
-    level2()   
+    level2()
+    gameMusic.play()  
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
   }
@@ -200,7 +203,7 @@ let renderGame = () => {
   
   else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4()) && renderLevel4()}
   else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5()) && renderLevel5()}
-  else if (readBlobsCounter() == "Blobs Destroyed = 15") {gameScores()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 15") {gameScores() && youWinSound.play()}
   
 }
 
@@ -252,10 +255,8 @@ function finishThis(){
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
   gameText()
   Player.renderNameForm()
 });
-
- 
-

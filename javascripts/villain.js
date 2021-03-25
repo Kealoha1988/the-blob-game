@@ -1,39 +1,22 @@
 class Villain {
+  
+  static all = []
 
- 
   constructor(name) {
     this.name = name
     this.setDiv
     // this.smiteVillain
   }
 
-  
-  static all = []
-
   savePlayer(){
     return Player.all.push(this)
   }
-
-  static checkIfDead(){
-
-
-    if (parseInt(timerTag().innerText) > 60){
-      all[i].checkIfBlobDestroyed
-    }
-  }
-
-
-
-
-
-
 
   setDiv () {
    return document.getElementById(`${this.name}`)
   }
 
  
-
 heightPx = () => {
   let villain = this.setDiv()
   
@@ -73,7 +56,6 @@ lessBlob = () => {
 }
 
 
- 
  smiteVillain = () => {
    this.setDiv().addEventListener("click", this.lessBlob)
  }
@@ -82,30 +64,12 @@ lessBlob = () => {
 
 checkIfBlobDestroyed = () => {
    
-  if (villain.style.width == "0px") {
-    villain.style.height = "0px"
-    blobsCounter()
-    renderGame()
-    setTimeout(() => {villain.style.width = ""}, 500)
-  }
-}
-
-checkIfBlobDestroyed = () => {
-   
   if (this.setDiv()?.style.width == "0px") {
     blobsCounter()
+    shellDrop.play()
     renderGame()
     setTimeout(() => {this.setDiv().style.width = ""}, 500)
   }
 }
-
-
-//  lessBlob = () => {
-//    let villain = this.setDiv()
-
-//    villain.lessBlobHeight()
-//    villain.lessBlobWidth()
-//  }
-
 
 }

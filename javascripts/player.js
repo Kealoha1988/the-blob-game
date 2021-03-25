@@ -25,8 +25,6 @@ class Player {
   }
 
 
-
-
 static renderNameForm = () => {
   resetPlayerTag();
   playerTag().innerHTML = nameTemplate();
@@ -40,7 +38,6 @@ static renderEditForm = () => {
     currentPlayer().edit(e)
 })
 }
-
 
 
   static findOrCreatePlayer(e) {
