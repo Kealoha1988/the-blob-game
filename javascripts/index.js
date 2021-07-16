@@ -3,8 +3,7 @@ let scores = []
 let blobCount = 0
 const baseUrl = 'http://localhost:3000'
 let shellDrop = new Audio('https://www.soundjay.com/button/sounds/button-7.mp3')
-let gameMusic = new Audio('https://www.soundjay.com/free-music/sounds/destination-01.mp')
-let youWinSound = new Audio("https://www.soundjay.com/misc/sounds/dream-harp-01.mp3")
+// let gameMusic = new Audio('https://www.soundjay.com/free-music/sounds/destination-01.mp')
 //countdown
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -149,8 +148,7 @@ let level5 = () => {
 
 
   let renderLevel2 = () => {
-    level2()
-    gameMusic.play()  
+    level2()   
     firstVillain.smiteVillain()
     secondVillain.smiteVillain()
   }
@@ -203,7 +201,7 @@ let renderGame = () => {
   
   else if (readBlobsCounter() == "Blobs Destroyed = 6") {currentLevel(level4()) && renderLevel4()}
   else if (readBlobsCounter() == "Blobs Destroyed = 10") {currentLevel(level5()) && renderLevel5()}
-  else if (readBlobsCounter() == "Blobs Destroyed = 15") {gameScores() && youWinSound.play()}
+  else if (readBlobsCounter() == "Blobs Destroyed = 15") {gameScores()}
   
 }
 
@@ -260,3 +258,36 @@ document.addEventListener("DOMContentLoaded", function () {
   gameText()
   Player.renderNameForm()
 });
+
+
+
+
+// let changeButton = () => {
+//   return `
+// <form id="change">
+// <input type="submit" value="change cololr" />
+// </form>`
+// }
+
+
+// mainTag().appendChild(document.createElement("div")).innerHTML =  changeButton()
+// mainTag().style.backgroundColor="white"
+
+// let findButton = () => document.getElementById("change")
+
+
+
+// let changing = () => {
+
+//   if (mainTag().style.backgroundColor === "white"){
+//     return mainTag().style.backgroundColor="black"
+//   }
+//   else if (mainTag().style.backgroundColor === "black"){
+//     return mainTag().style.backgroundColor="white"
+//   }
+// }
+
+// findButton().addEventListener("click", function(e){
+// e.preventDefault()
+// changing()
+// })

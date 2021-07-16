@@ -8,9 +8,7 @@ class Villain {
     // this.smiteVillain
   }
 
-  savePlayer(){
-    return Player.all.push(this)
-  }
+ 
 
   setDiv () {
    return document.getElementById(`${this.name}`)

@@ -40,6 +40,7 @@ static renderEditForm = () => {
 }
 
 
+
   static findOrCreatePlayer(e) {
     e.preventDefault();
     if (initialsInput().value == ""){
